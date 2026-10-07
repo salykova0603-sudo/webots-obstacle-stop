@@ -1,0 +1,48 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/factory/containers/protos/WoodenBox.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/adept/pioneer3/protos/Pioneer3dx.proto"
+
+WorldInfo {
+  info [ "Obstacle stop: corridor 8 x 2 m, box 3 m ahead of the robot" ]
+  basicTimeStep 16
+}
+Viewpoint {
+  orientation -0.35 0.35 0.87 1.7
+  position -2.5 -5.5 4.0
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+DEF CORRIDOR RectangleArena {
+  floorSize 8 2
+  wallHeight 0.5
+}
+DEF OBSTACLE WoodenBox {
+  translation 0.15 0 0.2
+  size 0.3 1.0 0.4
+}
+DEF ROBOT Pioneer3dx {
+  translation -3 0 0.0975
+  controller "obstacle_stop"
+  controllerArgs [
+    "0"
+    "0.40"
+    "A1"
+  ]
+  extensionSlot [
+    Lidar {
+      translation 0.2 0 0.15
+      name "lidar"
+      horizontalResolution 180
+      fieldOfView 3.14
+      numberOfLayers 1
+      minRange 0.05
+      maxRange 5
+    }
+  ]
+}
